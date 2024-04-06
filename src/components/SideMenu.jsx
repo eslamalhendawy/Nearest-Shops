@@ -24,19 +24,19 @@ const SideMenu = () => {
           </button>
           <ul className="space-y-6 text-xl">
             <li className="hover:text-secondary duration-200">
-              <Link to="/">Home</Link>
+              <Link to="/" onClick={toggleMenu(false)}>Home</Link>
             </li>
             <li className="hover:text-secondary duration-200">
-              <Link to="/collection">Collection</Link>
+              <Link to="/collection" onClick={toggleMenu(false)}>Collection</Link>
             </li>
             <li className="hover:text-secondary duration-200">
-              <Link to="/about">About</Link>
+              <Link to="/about"onClick={toggleMenu(false)}>About</Link>
             </li>
             <li className="hover:text-secondary duration-200">
-              <Link to="/contact">Contact</Link>
+              <Link to="/contact" onClick={toggleMenu(false)}>Contact</Link>
             </li>
             <li className="hover:text-secondary duration-200">
-              <Link to="/login">Login</Link>
+              <Link to="/login" onClick={toggleMenu(false)}>Login</Link>
             </li>
           </ul>
         </div>
