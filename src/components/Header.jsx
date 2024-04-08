@@ -6,7 +6,7 @@ import logo from "/assets/logo.png";
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-between py-4 px-4 lg:px-8 text-lg">
+    <header className="flex items-center justify-between py-4 px-4 lg:px-8 text-lg shadow">
       <SideMenu />
       <div className="max-w-[100px]">
         <img src={logo} className="h-[50px] md:h-[80px]" alt="logo" />
