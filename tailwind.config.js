@@ -9,7 +9,7 @@ export default {
       colors:{
         primary: "#F2E6D8",
         secondary: "#593825",
-        accent: "#A69E97",
+        accent: "#805733"
       }
     },
   },
