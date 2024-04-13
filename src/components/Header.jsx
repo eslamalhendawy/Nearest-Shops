@@ -9,7 +9,9 @@ const Header = () => {
     <header className="flex items-center justify-between py-4 px-4 lg:px-8 text-lg shadow">
       <SideMenu />
       <div className="max-w-[100px]">
+      <Link to="/">
         <img src={logo} className="h-[50px] md:h-[80px]" alt="logo" />
+      </Link>
       </div>
       <nav className="hidden lg:flex">
         <ul className="flex items-center gap-4">
