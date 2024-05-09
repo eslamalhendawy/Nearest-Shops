@@ -9,7 +9,7 @@ const Footer = () => {
           <p className="text-center text-sm mb-4">Receive Emails With The Latest Products & Deals!</p>
           <div className="flex flex-col sm:flex-row justify-center gap-2 mb-6">
             <input type="text" className="outline-none p-2 md:w-[40%]" placeholder="Enter Your Email..." />
-            <button className="py-2 px-2 md:px-6 bg-secondary text-white">Subscribe</button>
+            <button className="py-2 px-2 md:px-6 bg-secondary hover:bg-accent duration-200 text-white">Subscribe</button>
           </div>
           <ul className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
             <li className="hover:text-secondary duration-200">

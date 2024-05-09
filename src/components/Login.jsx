@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import image from "/assets/loginImage.svg";
 
 const Login = () => {
@@ -35,7 +36,7 @@ const Login = () => {
           <button className="bg-secondary text-white py-2 px-8 rounded-xl block mx-auto">Login</button>
           <div className="mt-12">
             <p className="text-center">
-              Don&apos;t have an account? <a href="#" className="text-secondary">Sign Up</a>
+              Don&apos;t have an account? <Link to="/sign-up" className="text-secondary">Sign Up</Link>
             </p>
           </div>
         </div>
