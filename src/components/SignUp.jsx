@@ -45,13 +45,13 @@ const SignUp = () => {
           <div className="flex flex-col sm:flex-row gap-4 mb-4">
             <div className="flex flex-col grow">
               <label className="text-secondary font-semibold text-lg mb-2" htmlFor="height">
-                Height
+                Height <span className="text-sm font-[400]">(in cm)</span>
               </label>
               <input className="outline-none mb-4 bg-[#A69E97] text-secondary p-2 rounded-lg" type="text" id="height" />
             </div>
             <div className="flex flex-col grow">
               <label className="text-secondary font-semibold text-lg mb-2" htmlFor="weight">
-                Weight
+                Weight <span className="text-sm font-[400]">(in kg)</span>
               </label>
               <input className="outline-none mb-4 bg-[#A69E97] text-secondary p-2 rounded-lg" type="text" id="weight" />
             </div>
