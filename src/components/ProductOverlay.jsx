@@ -16,12 +16,12 @@ const ProductOverlay = ({ data }) => {
             <div onClick={() => setOpen(false)} className="absolute cursor-pointer bg-white border-2 size-[25px] flex items-center justify-center rounded-full top-[-10px] right-[-10px]">
               <i className="fa-solid fa-xmark"></i>
             </div>
-            <div className="basis-1/2">
-              <img src={data.imageHighRes} alt="" />
+            <div className="basis-1/2 h-[480px]">
+              <img className="w-full h-full" src={data.images[0]} alt="" />
             </div>
             <div className="basis-1/2 p-4 flex flex-col justify-between">
               <div className="mb-4">
-                <span className="text-[#b1adad] font-[300] text-sm">{data.category}</span>
+                <span className="text-[#b1adad] font-[300] text-sm">{data.category.name}</span>
                 <h2 className="text-xl md:text-2xl font-semibold my-2">{data.name}</h2>
                 <p className="text-xs md:text-lg font-semibold text-[#706e6e] mb-2 md:mb-8">{data.price}</p>
                 <p className=" text-sm md:text-base text-[#9b9b9b]">{data.description}</p>

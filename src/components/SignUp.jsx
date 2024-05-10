@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { postData } from "../Services/apiCalls";
 import { useAppContext } from "../Context/AppContext";
 
@@ -17,17 +17,14 @@ const SignUp = () => {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const { userData, setUserData } = useAppContext();
+  const navigate = useNavigate();
 
-  const regCharectars = /^[A-Za-z]+$/;
   const regNumbers = /^[0-9]+$/;
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
 
   const handleRegister = async () => {
     if (!name || !phone || !email || !password || !passwordConfirm || !height || !weight) {
       return toast.error("Please fill all the fields");
-    }
-    if (!name.match(regCharectars)) {
-      return toast.error("Name should only contain alphabets");
     }
     if (!phone.match(regNumbers)) {
       return toast.error("Phone number should only contain numbers");
@@ -58,7 +55,6 @@ const SignUp = () => {
     }
     toast.info("Registering...");
     let response = await postData("auth/register", { name, phone, email, password, passwordConfirm, height, weight });
-    console.log(response);
     if (response.status === "success") {
       setUserData({
         ...userData,
@@ -73,7 +69,11 @@ const SignUp = () => {
         wishlist: response.data.user.wishlist,
         loggedIn: true,
       });
+      localStorage.setItem("token", response.token);
       toast.success("Registered Successfully");
+      navigate("/");
+    }else{
+      toast.error(response.response.data.message);
     }
   };
 

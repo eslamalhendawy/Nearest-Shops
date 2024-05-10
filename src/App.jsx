@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useAppContext } from "./Context/AppContext";
+import { useEffect } from "react";
+import { getData } from "./Services/apiCalls";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,8 +13,35 @@ import HomePage from "./components/HomePage";
 import Contact from "./components/Contact";
 import About from "./components/About";
 import SignUp from "./components/SignUp";
+import Profile from "./components/Profile";
+import Collection from "./components/Collection";
 
 function App() {
+  const loggedIn = Boolean(localStorage.getItem("token"));
+  const { setUserData } = useAppContext();
+
+  useEffect(() => {
+    if(loggedIn) {
+      const token = localStorage.getItem("token");
+      getData("users", token).then((response) => {
+        if(response.status === "success") {
+          setUserData({
+            name: response.data.user.name,
+            email: response.data.user.email,
+            phone: response.data.user.phone,
+            height: response.data.user.height,
+            weight: response.data.user.weight,
+            address: response.data.user.address,
+            role: response.data.user.role,
+            avatar: response.data.user.photo,
+            wishlist: response.data.user.wishlist,
+            loggedIn: true,
+          });
+        }
+      });
+    }
+  }, []);
+
   return (
     <>
       <Router>
@@ -22,6 +52,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/collection" element={<Collection />} />
         </Routes>
         <Footer />
       </Router>
