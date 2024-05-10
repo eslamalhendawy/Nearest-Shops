@@ -9,7 +9,6 @@ const Collection = () => {
   useEffect(() => {
     const fetchCollection = async () => {
       const response = await getData("products");
-      console.log(response.data.products);
       if (response.status === "success") {
         setProducts(response.data.products);
         setLoading(false);
