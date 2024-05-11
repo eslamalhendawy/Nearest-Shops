@@ -15,6 +15,7 @@ import About from "./components/About";
 import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
 import Collection from "./components/Collection";
+import Product from "./components/Product";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("token"));
@@ -54,6 +55,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/collection" element={<Collection />} />
+          <Route path="/product/:name" element={<Product />} />
         </Routes>
         <Footer />
       </Router>

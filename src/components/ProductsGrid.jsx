@@ -9,8 +9,8 @@ const ProductsGrid = ({ products }) => {
         <div key={index}>
           <div className="w-[300px] h-[366px] relative group">
             <ProductOverlay data={product} />
-            <Link className="block h-full" to={`/product/${index + 1}`}>
-              <img className="w-full h-full" src={product.images[0]} alt="" />
+            <Link className="block h-full" to={`/product/${product.slug}`}>
+              <img className="w-full h-full" src={product.images[0]} alt={product.name} />
             </Link>
           </div>
           <Link to={`/product/${index + 1}`}>
