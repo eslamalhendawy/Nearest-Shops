@@ -1,5 +1,11 @@
+import { useEffect } from "react";
 
 const Contact = () => {
+  
+  useEffect(() => {
+    document.title = `Nearest Shops | Contact Us`;
+  }, []);
+
   return (
     <section className="container mx-auto px-4 py-24">
       <h1 className="text-center font-bold text-6xl mb-6 text-accent">Contact</h1>

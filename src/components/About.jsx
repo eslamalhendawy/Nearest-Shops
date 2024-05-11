@@ -1,7 +1,14 @@
+import { useEffect } from "react";
+
 import heroImage from "/assets/aboutHero.jpg";
 import about1 from "/assets/about1.jpg";
 
 const About = () => {
+
+  useEffect(() => {
+    document.title = `Nearest Shops | About Us`;
+  }, []);
+
   return (
     <>
       <section className="container mx-auto px-4 py-24">

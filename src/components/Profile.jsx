@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useAppContext } from "../Context/AppContext";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 const Profile = () => {
   const { userData, setUserData } = useAppContext();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = `Nearest Shops | ${userData.name}`;
+  }, []);
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");

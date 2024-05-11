@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import Hero from "./Hero";
 import BestSellers from "./BestSellers";
 import Features1 from "./Features1";
@@ -7,6 +9,11 @@ import NewArrivals from "./NewArrivals";
 import Review from "./Review";
 
 const HomePage = () => {
+
+  useEffect(() => {
+    document.title = `Nearest Shops`;
+  }, []);
+
   return (
     <>
       <Hero />

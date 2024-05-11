@@ -10,6 +10,10 @@ const Product = () => {
   const { name } = useParams();
 
   useEffect(() => {
+    document.title = `Nearest Shops | ${loading ? "Loading" : product.name}`;
+  }, [product]);
+
+  useEffect(() => {
     const fetchProduct = async () => {
       const response = await getData(`products/${name}`);
       if (response.status === "success") {

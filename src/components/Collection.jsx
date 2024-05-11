@@ -6,6 +6,11 @@ import SkeletonGrid from "./SkeletonGrid";
 const Collection = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    document.title = `Nearest Shops | Collection`;
+  }, []);
+
   useEffect(() => {
     const fetchCollection = async () => {
       const response = await getData("products");
