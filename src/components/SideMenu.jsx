@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useAppContext } from "../Context/AppContext";
 import { Link } from "react-router-dom";
 
 import Drawer from "@mui/material/SwipeableDrawer";
 
 const SideMenu = () => {
+  const { userData } = useAppContext();
   const [openMenu, setOpen] = useState(false);
   const toggleMenu = (openStatus) => (event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -36,7 +38,7 @@ const SideMenu = () => {
               <Link to="/contact" onClick={toggleMenu(false)}>Contact</Link>
             </li>
             <li className="hover:text-secondary duration-200">
-              <Link to="/login" onClick={toggleMenu(false)}>Login</Link>
+              {userData.loggedIn ? <Link to="/profile" onClick={toggleMenu(false)}>{userData.name}</Link> : <Link to="/login" onClick={toggleMenu(false)}>Login</Link>}
             </li>
           </ul>
         </div>

@@ -7,7 +7,7 @@ import Cart from "./Cart";
 import logo from "/assets/logo.png";
 
 const Header = () => {
-  const { userData, setUserData } = useAppContext();
+  const { userData } = useAppContext();
   return (
     <header className="flex items-center justify-between py-4 px-4 lg:px-8 text-lg shadow">
       <SideMenu />
