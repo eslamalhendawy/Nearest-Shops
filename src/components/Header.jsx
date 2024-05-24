@@ -2,6 +2,7 @@ import { useAppContext } from "../Context/AppContext";
 import { Link } from "react-router-dom";
 
 import SideMenu from "./SideMenu";
+import Cart from "./Cart";
 
 import logo from "/assets/logo.png";
 
@@ -32,12 +33,14 @@ const Header = () => {
         </ul>
       </nav>
       <div className="flex items-center gap-4">
-        <i className="fa-solid fa-magnifying-glass hover:text-secondary duration-200"></i>
-        <i className="fa-solid fa-cart-shopping hover:text-secondary duration-200"></i>
+        <i className="fa-solid fa-magnifying-glass hover:text-secondary duration-200 cursor-pointer md:text-2xl"></i>
         {userData.loggedIn ? (
-          <Link to="/profile" className="hidden lg:block hover:text-secondary duration-200">
-            {userData.name}
-          </Link>
+          <>
+            <Cart />
+            <Link to="/profile" className="hidden lg:block hover:text-secondary duration-200">
+              {userData.name}
+            </Link>
+          </>
         ) : (
           <Link to="/login" className="hidden lg:block hover:text-secondary duration-200">
             Login

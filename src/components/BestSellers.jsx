@@ -1,44 +1,27 @@
+import { useEffect, useState } from "react";
+import { getData } from "../Services/apiCalls";
 import ProductsGrid from "./ProductsGrid";
+import SkeletonGrid from "./SkeletonGrid";
 
 const BestSellers = () => {
-  const products = [
-    {
-      name: "Product 1",
-      price: "33.00",
-      category: "Category 1",
-      image: "/assets/product1.jpg",
-      imageHighRes: "/assets/product1HighRes.jpg",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus interdum eros. In blandit velit a lacus laoreet dictum. Maecenas vel vulputate nulla. Ut nec enim vel tortor aliquet varius.",
-    },
-    {
-      name: "Product 2",
-      price: "33.00",
-      category: "Category 2",
-      image: "/assets/product2.jpg",
-      imageHighRes: "/assets/product2HighRes.jpg",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus interdum eros. In blandit velit a lacus laoreet dictum. Maecenas vel vulputate nulla. Ut nec enim vel tortor aliquet varius.",
-    },
-    {
-      name: "Product 3",
-      price: "33.00",
-      category: "Category 3",
-      image: "/assets/product3.jpg",
-      imageHighRes: "/assets/product3HighRes.jpg",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus interdum eros. In blandit velit a lacus laoreet dictum. Maecenas vel vulputate nulla. Ut nec enim vel tortor aliquet varius.",
-    },
-    {
-      name: "Product 4",
-      price: "33.00",
-      category: "Category 4",
-      image: "/assets/product4.jpg",
-      imageHighRes: "/assets/product4HighRes.jpg",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus interdum eros. In blandit velit a lacus laoreet dictum. Maecenas vel vulputate nulla. Ut nec enim vel tortor aliquet varius.",
-    },
-  ];
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await getData("products/popular");
+      if (response.status === "success") {
+        setProducts(response.data.products);
+        setLoading(false);
+      }
+    }
+    fetchProducts();
+  }, []);
+
   return (
     <section className="container mx-auto px-4 py-24">
-      <h3 className="text-center font-semibold text-3xl mb-6">Best Selling Products</h3>
-      <ProductsGrid products={products} />
+      <h3 className="text-center font-semibold text-3xl mb-8">Most Popular Products</h3>
+      {loading ? <SkeletonGrid /> : <ProductsGrid products={products} /> }
     </section>
   );
 };

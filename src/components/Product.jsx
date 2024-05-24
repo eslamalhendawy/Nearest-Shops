@@ -1,13 +1,20 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getData } from "../Services/apiCalls";
+import { useAppContext } from "../Context/AppContext";
+import { useParams, useNavigate } from "react-router-dom";
+import { getData, postData, deleteData } from "../Services/apiCalls";
 import Skeleton from "@mui/material/Skeleton";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Product = () => {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(1);
   const { name } = useParams();
+  const { userData } = useAppContext();
+  const userToken = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = `Nearest Shops | ${loading ? "Loading" : product.name}`;
@@ -15,7 +22,7 @@ const Product = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const response = await getData(`products/${name}`);
+      const response = await getData(`products/${name}`, userToken);
       if (response.status === "success") {
         setProduct(response.data.product);
         setLoading(false);
@@ -23,6 +30,34 @@ const Product = () => {
     };
     fetchProduct();
   }, []);
+
+  const toggleWishlist = async () => {
+    if(product.isInFavorites) {
+      const response = await deleteData(`users/wishlist/${product._id}`, userToken);
+      if(response.status === "success"){
+        window.location.reload();
+      }           
+    }else{
+      const response = await postData(`users/wishlist/${product._id}`, {}, userToken);
+      console.log(response);
+      if(response.status === "success"){
+        window.location.reload();
+      }
+    }
+  }
+
+  const handleAddToCart = async () => {
+    if (!userData.loggedIn) {
+      navigate("/login");
+      toast.error("Please login to add to cart");
+      return;
+    }
+    const response = await postData("cart", { products: {productID: product._id, quantity: count}}, userToken);
+    console.log(response);
+    if(response.message === "Item Added to Cart"){
+      toast.success("Item Added to Cart");
+    }
+  };
 
   return (
     <section className={`container mx-auto px-4 py-24 flex flex-col lg:flex-row gap-6 lg:gap-12 items-center`}>
@@ -65,7 +100,7 @@ const Product = () => {
               )}
             </div>
             <div className="flex items-center mb-4">
-              <button className="bg-secondary hover:bg-accent text-white text-sm duration-300 px-6 h-[40px] mr-8">Add To Cart</button>
+              <button onClick={handleAddToCart} className="bg-secondary hover:bg-accent text-white text-sm duration-300 px-6 h-[40px] mr-8">Add To Cart</button>
               <button
                 onClick={() => {
                   if (count > 1) {
@@ -81,7 +116,7 @@ const Product = () => {
                 +
               </button>
             </div>
-            <button className="bg-secondary hover:bg-accent text-white text-sm duration-300 px-6 h-[40px]">Add To Wishlist</button>
+            {userData.loggedIn && <button onClick={toggleWishlist} className="bg-secondary hover:bg-accent text-white text-sm duration-300 px-6 h-[40px]">{product.isInFavorites ? "Remove From Wishlist" : "Add To Wishlist"}</button>}
           </div>
         </>
       )}
