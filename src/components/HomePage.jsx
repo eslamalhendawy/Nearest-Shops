@@ -12,6 +12,7 @@ const HomePage = () => {
 
   useEffect(() => {
     document.title = `Nearest Shops`;
+    window.scrollTo(0, 0);
   }, []);
 
   return (

@@ -4,6 +4,7 @@ const Contact = () => {
   
   useEffect(() => {
     document.title = `Nearest Shops | Contact Us`;
+    window.scrollTo(0, 0);
   }, []);
 
   return (

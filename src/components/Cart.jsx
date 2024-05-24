@@ -18,13 +18,12 @@ const Cart = () => {
 
   const removeFromCart = async (id) => {
     const response = await deleteData(`cart/${id}`, userToken);
-    console.log(response);
+    setOpen(false);
   };
 
   useEffect(() => {
     const fetchCart = async () => {
       const cartData = await getData("cart", userToken);
-      console.log(cartData.cart.products);
       setCartItems(cartData.cart.products);
       setLoading(false);
     };
@@ -59,7 +58,7 @@ const Cart = () => {
                       </div>
                     </div>
                     <div>
-                      <i onClick={() => removeFromCart(item._id)} className="fa-solid fa-x text-xl hover:text-[#B23B3B] duration-200 cursor-pointer"></i>
+                      <i onClick={() => removeFromCart(item.productID.id)} className="fa-solid fa-x text-xl hover:text-[#B23B3B] duration-200 cursor-pointer"></i>
                     </div>
                   </div>
                 ))}

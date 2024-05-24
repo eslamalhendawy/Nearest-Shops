@@ -7,6 +7,7 @@ const About = () => {
 
   useEffect(() => {
     document.title = `Nearest Shops | About Us`;
+    window.scrollTo(0, 0);
   }, []);
 
   return (

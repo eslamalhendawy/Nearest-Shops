@@ -9,6 +9,7 @@ const Collection = () => {
 
   useEffect(() => {
     document.title = `Nearest Shops | Collection`;
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {

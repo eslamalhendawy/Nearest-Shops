@@ -18,6 +18,7 @@ const Product = () => {
 
   useEffect(() => {
     document.title = `Nearest Shops | ${loading ? "Loading" : product.name}`;
+    window.scrollTo(0, 0);
   }, [product]);
 
   useEffect(() => {
