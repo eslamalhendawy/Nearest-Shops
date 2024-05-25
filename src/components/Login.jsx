@@ -36,6 +36,8 @@ const Login = () => {
       });
       localStorage.setItem("token", response.token);
       navigate("/");
+    }else{
+      toast.error("Invalid Credentials");
     }
   };
 
@@ -66,11 +68,11 @@ const Login = () => {
                 Remember Me
               </label>
             </div>
-            <a href="#" className="text-secondary">
+            <Link to="/forgot-password" className="text-secondary">
               Forgot Password?
-            </a>
+            </Link>
           </div>
-          <button onClick={handleLogin} className="bg-secondary text-white py-2 px-8 rounded-xl block mx-auto">
+          <button onClick={handleLogin} className="bg-secondary hover:bg-accent duration-200 text-white py-2 px-8 rounded-xl block mx-auto">
             Login
           </button>
           <div className="mt-12">

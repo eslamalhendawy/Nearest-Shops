@@ -16,6 +16,9 @@ import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
 import Collection from "./components/Collection";
 import Product from "./components/Product";
+import ForgotPassword from "./components/ForgotPassword";
+import OTP from "./components/OTP";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("token"));
@@ -56,6 +59,9 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/product/:name" element={<Product />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/otp" element={<OTP />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
         <Footer />
       </Router>
