@@ -23,6 +23,7 @@ import CartPage from "./components/CartPage";
 import PaymentType from "./components/PaymentType";
 import CashOnDelivery from "./components/CashOnDelivery";
 import PayOnline from "./components/PayOnline";
+import Search from "./components/Search";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("token"));
@@ -70,6 +71,7 @@ function App() {
           <Route path="/payment-type" element={<PaymentType />} />
           <Route path="/cash-on-delivery" element={<CashOnDelivery />} />
           <Route path="/pay-online" element={<PayOnline />} />
+          <Route path="/search/:query" element={<Search />} />
         </Routes>
         <Footer />
       </Router>
