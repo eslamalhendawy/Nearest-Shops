@@ -19,6 +19,7 @@ import Product from "./components/Product";
 import ForgotPassword from "./components/ForgotPassword";
 import OTP from "./components/OTP";
 import ResetPassword from "./components/ResetPassword";
+import CartPage from "./components/CartPage";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("token"));
@@ -62,6 +63,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/otp" element={<OTP />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
         <Footer />
       </Router>
