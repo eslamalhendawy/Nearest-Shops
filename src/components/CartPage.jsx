@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getData } from "../Services/apiCalls";
-import Skeleton from "@mui/material/Skeleton";
 
 import CartPageSkeleton from "./CartPageSkeleton";
 import TotalSkeleton from "./TotalSkeleton";
@@ -15,8 +14,8 @@ const CartPage = () => {
     const fetchCart = async () => {
       const userToken = localStorage.getItem("token");
       const cartData = await getData("cart", userToken);
-      console.log(cartData.cart);
-      setTotalPrice(cartData.cart.totalPrice);
+      localStorage.setItem("cartID", cartData.cart._id)
+      setTotalPrice(cartData.cart.totalPrice.toFixed(2));
       setProducts(cartData.cart.products);
       setFetching(false);
     };
@@ -47,13 +46,13 @@ const CartPage = () => {
                         <p className="text-[#212529] text-sm sm:text-base">{product.productID.name}</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-[#212529] text-sm sm:text-base">Price: ${product.productID.price}</p>
+                        <p className="text-[#212529] text-sm sm:text-base">Price: {product.productID.price}EGP</p>
                       </div>
                       <div className="text-center">
                         <p className="text-[#212529] text-sm sm:text-base">Quantity: {product.quantity}</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-[#212529] text-sm sm:text-base">Subtotal: ${product.productID.price * product.quantity}</p>
+                        <p className="text-[#212529] text-sm sm:text-base">Subtotal: {(product.productID.price * product.quantity).toFixed(2)}EGP</p>
                       </div>
                     </div>
                   );
@@ -71,13 +70,13 @@ const CartPage = () => {
                   <>
                     <div className="flex justify-between space-x-2 px-8 py-2 text-[#979a9b] font-semibold">
                       <p className="text-lg">Total</p>
-                      <p className="text-lg">${totalPrice}</p>
+                      <p className="text-lg">{totalPrice}EGP</p>
                     </div>
                   </>
                 )}
               </div>
-              <Link to="/checkout" className="bg-accent hover:bg-secondary font-semibold text-center text-white duration-300 px-6 py-4">
-                Proceed To Checkout
+              <Link to="/payment-type" className="bg-accent hover:bg-secondary font-semibold text-center text-white duration-300 px-6 py-2">
+                Choose Payment Type
               </Link>
             </div>
           </div>

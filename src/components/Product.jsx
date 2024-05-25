@@ -54,7 +54,6 @@ const Product = () => {
       return;
     }
     const response = await postData("cart", { products: {productID: product._id, quantity: count}}, userToken);
-    console.log(response);
     if(response.message === "Item Added to Cart"){
       toast.success("Item Added to Cart");
     }
