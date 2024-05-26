@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getData } from "../Services/apiCalls";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -17,6 +17,7 @@ const Chatbot = () => {
   const [loading, setLoading] = useState(true);
   const [recommendation, setRecommendation] = useState("");
   const [loading2, setLoading2] = useState(true);
+  const parentDev = useRef();
 
   useEffect(() => {
     document.title = `Nearest Shops | Chatbot`;
@@ -33,11 +34,12 @@ const Chatbot = () => {
   }, []);
 
   const sendMessage = () => {
+    parentDev.current.scrollTop = parentDev.current.scrollHeight;
     if (message === "") {
       return toast.error("Please enter a message");
     }
     if (stage === 1) {
-      if (message.toLowerCase().includes("male") || message.toLowerCase().includes("female")) {
+      if (message.toLowerCase().includes("male") || message.toLowerCase().includes("female") || message.toLowerCase().includes("both")) {
         setGender(message);
         setMessage("");
         setStage(2);
@@ -71,7 +73,7 @@ const Chatbot = () => {
         setCategory(message);
         setMessage("");
         setStage(5);
-        fetchRecommendation();
+        fetchRecommendation(weight, height, gender, message.toLowerCase());
       } else {
         toast.error("Please enter a valid category");
         setMessage("");
@@ -79,8 +81,8 @@ const Chatbot = () => {
     }
   };
 
-  const fetchRecommendation = async () => {
-    const response = await axios.post("https://pynearshop.codepeak.live/recommend", { weight, height, gender, category });
+  const fetchRecommendation = async (w, h, g, c) => {
+    const response = await axios.post("https://pynearshop.codepeak.live/recommend", { weight: w, height: h, gender: g, category: c });
     if (response.status === 200) {
       setRecommendation(response.data.products);
       setLoading2(false);
@@ -99,7 +101,7 @@ const Chatbot = () => {
         <h3 className="text-center font-semibold text-3xl mb-4">Chat Bot</h3>
         <p className="text-center font-semibold text-xl mb-8 capitalize">Talk to our new chatbot and get a recommendation !</p>
         <div className="bg-[#fafafa] min-h-[400px] border flex flex-col justify-between md:max-w-[560px]">
-          <div className="messages flex flex-col overflow-y-scroll h-[360px]">
+          <div ref={parentDev} className="messages flex flex-col overflow-y-scroll h-[360px]">
             <div className="p-2 flex items-center gap-2">
               <div className="text-xl bg-accent size-[40px] flex justify-center items-center text-white rounded-full">
                 <i className="fa-solid fa-headset"></i>
@@ -116,7 +118,7 @@ const Chatbot = () => {
               <div className="text-xl bg-accent size-[40px] flex justify-center items-center text-white rounded-full">
                 <i className="fa-solid fa-headset"></i>
               </div>
-              <div className="grow b-white h-[40px] flex items-center bg-white border px-2 rounded-xl">What is your gender ?</div>
+              <div className="grow b-white h-[40px] flex items-center bg-white border px-2 rounded-xl">What type are you looking for (Male, Female, Both) ?</div>
             </div>
             {gender !== "" && (
               <div className="p-2 flex items-center gap-2">
