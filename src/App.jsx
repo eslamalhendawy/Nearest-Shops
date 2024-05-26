@@ -24,6 +24,7 @@ import PaymentType from "./components/PaymentType";
 import CashOnDelivery from "./components/CashOnDelivery";
 import PayOnline from "./components/PayOnline";
 import Search from "./components/Search";
+import Chatbot from "./components/Chatbot";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("token"));
@@ -72,6 +73,7 @@ function App() {
           <Route path="/cash-on-delivery" element={<CashOnDelivery />} />
           <Route path="/pay-online" element={<PayOnline />} />
           <Route path="/search/:query" element={<Search />} />
+          <Route path="/chatbot" element={<Chatbot />} />
         </Routes>
         <Footer />
       </Router>

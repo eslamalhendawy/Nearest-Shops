@@ -10,6 +10,7 @@ import BasicInfoOverlay from "./BasicInfoOverlay";
 import UpdateAvatarOverlay from "./UpdateAvatarOverlay";
 import UpdateAddressOverlay from "./UpdateAddressOverlay";
 import UpdateMeasurementsOverlay from "./UpdateMeasurementsOverlay";
+import UpdatePasswordOverlay from "./UpdatePasswordOverlay";
 
 const Profile = () => {
   const { userData, setUserData } = useAppContext();
@@ -65,17 +66,23 @@ const Profile = () => {
         <h1 className="text-center md:text-left font-semibold text-3xl mb-6">Basic Info</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
           <div className="relative">
-            <img className="size-[100px] rounded-full" src={userData.avatar} alt="profile picture" />
+            <img className="size-[125px] rounded-full" src={userData.avatar} alt="profile picture" />
             <UpdateAvatarOverlay />
           </div>
           <div className="text-center md:text-left">
-            <h1 className="text-2xl font-semibold ">{userData.name}</h1>
-            <div className="flex flex-col md:flex-row items-center gap-4">
-              <div className="flex flex-col md:flex-row items-center gap-2">
+            <h1 className="text-2xl font-semibold mb-4">{userData.name}</h1>
+            <div className="flex flex-col md:flex-row items-center gap-4 mb-4">
+              <div className="flex flex-col md:flex-row items-center gap-2 ">
                 <p>Email: {userData.email}</p>
                 <p>Phone: {userData.phone}</p>
               </div>
               <BasicInfoOverlay />
+            </div>
+            <div className="flex items-center gap-2">
+              <p>
+                Password: <span>**********</span>
+              </p>
+              <UpdatePasswordOverlay />
             </div>
           </div>
         </div>
