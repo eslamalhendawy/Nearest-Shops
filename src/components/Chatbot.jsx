@@ -82,7 +82,9 @@ const Chatbot = () => {
   };
 
   const fetchRecommendation = async (w, h, g, c) => {
+    console.log();
     const response = await axios.post("https://pynearshop.codepeak.live/recommend", { weight: w, height: h, gender: g, category: c });
+    console.log(response);
     if (response.status === 200) {
       setRecommendation(response.data.products);
       setLoading2(false);
@@ -190,12 +192,16 @@ const Chatbot = () => {
                   <div className="text-xl bg-accent size-[40px] flex justify-center items-center text-white rounded-full">
                     <i className="fa-solid fa-headset"></i>
                   </div>
-                  <div className="grow b-white py-1 flex flex-wrap gap-2 items-center bg-white border px-2 rounded-xl">
+                  <div className="grow b-white flex flex-col gap-2 items-center bg-white border py-2 px-2 rounded-xl">
                     {loading2
                       ? "Loading Recommendation"
                       : recommendation.map((recommendation, index) => (
-                          <Link to={`/product/${recommendation.slug}`} className="text-accent" key={index}>
-                            {recommendation.name}{" "}
+                          <Link to={`/product/${recommendation.slug}`} className="text-accent block" key={index}>
+                            <div className="flex flex-col gap-2 border w-full p-2 rounded-lg">
+                              <span>Product Name: {recommendation.name}</span>
+                              <span>Product Score: {recommendation.score}</span>
+                              <span>Recommended Size: {recommendation.recommended_size.size}</span>
+                            </div>
                           </Link>
                         ))}
                   </div>
